@@ -12,7 +12,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-console.log(process.env)
+console.log('this is process.env', process.env)
 
 app.get('/backend', (req, res) => {
   res.json({ works: 'yeah works woo'})
