@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors')
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 9000
 
 app.use(express.static('build'));
+app.use(express.json())
+app.use(cors())
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -11,7 +14,9 @@ app.get('/', function(req, res) {
 
 
 app.get('/backend', (req, res) => {
-  res.send({ express: 'Your backend is connected to react' })
+  res.json({ works: 'yeah works woo'})
 })
 
-app.listen(port);
+app.listen(port,() => {
+  console.log('hi I am on port', port)
+});

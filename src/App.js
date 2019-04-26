@@ -14,16 +14,18 @@ state = {
     data: null
   };
 
-  componentDidMount() {
+  async componentDidMount() {
       // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
+      this.callBackendAPI()
+      .then(res => this.setState({ data: res.works }))
       .catch(err => console.log(err));
   }
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/backend');
-    const body = await response.json();
+    const response = await fetch('http://localhost:9000/backend');
+    console.log(response)
+  const body = await response.json();
+
 
     if (response.status !== 200) {
       throw Error(body.message)
@@ -38,6 +40,8 @@ state = {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
+          <h2> OMG HAIIIIII!</h2>
+          <h3>{this.state.data}</h3>
         </header>
         <p className="App-intro">{this.state.data}</p>
       </div>
