@@ -22,7 +22,7 @@ state = {
   }
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('http://localhost:9000/backend');
+    const response = await fetch('/backend');
     console.log(response)
   const body = await response.json();
 
