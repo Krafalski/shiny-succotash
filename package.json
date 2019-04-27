@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "main": "server.js",
+  "engines": {
+    "node": "10.11.0",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "react": "^16.8.6",
