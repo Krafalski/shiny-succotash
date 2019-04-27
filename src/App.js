@@ -1,49 +1,54 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 console.log(process.env)
-
-// localhost
-// {NODE_ENV: "development", PUBLIC_URL: ""}
-// NODE_ENV: "development"
-// PUBLIC_URL: ""
 
 class App extends Component {
 state = {
-    data: null
+    data: null,
+    waters: []
   };
 
   async componentDidMount() {
       // Call our fetch function below once the component mounts
-      this.callBackendAPI()
-      .then(res => this.setState({ data: res.works }))
+      this.getWaters()
+      .then(res => this.setState({ waters: res }))
       .catch(err => console.log(err));
   }
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/backend');
-    console.log(response)
-  const body = await response.json();
+  // callBackendAPI = async () => {
+  //   const response = await fetch('/backend');
+  //   console.log(response)
+  // const body = await response.json();
+  //
+  //
+  //   if (response.status !== 200) {
+  //     throw Error(body.message)
+  //   }
+  //   return body;
+  // };
 
-
+  getWaters = async () => {
+    const response = await fetch('http://localhost:9000/waters')
+    const body = await response.json()
     if (response.status !== 200) {
       throw Error(body.message)
     }
-    return body;
-  };
+    return body
+  }
 
   render() {
-    console.log(this.state.data)
+    console.log(this.state.waters)
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
           <h2> OMG HAIIIIII!</h2>
-          <h3>{this.state.data}</h3>
+          {this.state.waters.map(water => {
+           return  <p>{water.brand}</p>
+          })}
         </header>
-        <p className="App-intro">{this.state.data}</p>
       </div>
     );
   }
